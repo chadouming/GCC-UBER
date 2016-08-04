@@ -5764,8 +5764,8 @@ rs6000_file_start (void)
     }
 
 #ifdef USING_ELFOS_H
-  if (rs6000_default_cpu == 0 || rs6000_default_cpu[0] == '\0'
-      || !global_options_set.x_rs6000_cpu_index)
+  if (!(rs6000_default_cpu && rs6000_default_cpu[0])
+      && !global_options_set.x_rs6000_cpu_index)
     {
       fputs ("\t.machine ", asm_out_file);
       if ((rs6000_isa_flags & OPTION_MASK_MODULO) != 0)
@@ -14245,6 +14245,7 @@ altivec_expand_ld_builtin (tree exp, rtx target, bool *expandedp)
       break;
     case ALTIVEC_BUILTIN_LD_INTERNAL_2di:
       icode = CODE_FOR_vector_altivec_load_v2di;
+      break;
     case ALTIVEC_BUILTIN_LD_INTERNAL_1ti:
       icode = CODE_FOR_vector_altivec_load_v1ti;
       break;
@@ -14306,6 +14307,7 @@ altivec_expand_st_builtin (tree exp, rtx target ATTRIBUTE_UNUSED,
       break;
     case ALTIVEC_BUILTIN_ST_INTERNAL_2di:
       icode = CODE_FOR_vector_altivec_store_v2di;
+      break;
     case ALTIVEC_BUILTIN_ST_INTERNAL_1ti:
       icode = CODE_FOR_vector_altivec_store_v1ti;
       break;
