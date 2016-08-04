@@ -1,3 +1,28 @@
+2016-08-01  Georg-Johann Lay  <avr@gjlay.de>
+
+	Backport from 2016-08-01 trunk r238948.
+
+	PR target/72767
+	* config/avr/avr.md (length) [branch]: Correct insn length
+	attribute for forward branches.
+
+2016-07-29  Marek Polacek  <polacek@redhat.com>
+
+	Backport from mainline
+	2016-07-29  Marek Polacek  <polacek@redhat.com>
+
+	PR c/7652
+	* config/rs6000/rs6000.c (altivec_expand_ld_builtin): Add break.
+	(altivec_expand_st_builtin): Likewise.
+	* config/i386/i386.c (ix86_expand_args_builtin): Likewise.
+	(ix86_expand_round_builtin): Likewise.
+
+2016-07-27  Segher Boessenkool  <segher@kernel.crashing.org>
+
+	PR target/71216
+	* config/rs6000/rs6000.c (rs6000_file_start): Fix condition for
+	when to emit a ".machine" pseudo-op.
+
 2016-07-26  Alan Modra  <amodra@gmail.com>
 
 	PR target/72103
