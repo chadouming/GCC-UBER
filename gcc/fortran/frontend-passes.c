@@ -711,7 +711,7 @@ cfe_expr_0 (gfc_expr **e, int *walk_subtrees,
 
   /* Don't do this optimization within OMP workshare.  */
 
-  if (in_omp_workshare)
+  if (in_omp_workshare || in_assoc_list)
     {
       *walk_subtrees = 0;
       return 0;
@@ -1219,6 +1219,11 @@ combine_array_constructor (gfc_expr *e)
 
   /* With FORALL, the BLOCKS created by create_var will cause an ICE.  */
   if (forall_level > 0)
+    return false;
+
+  /* Inside an iterator, things can get hairy; we are likely to create
+     an invalid temporary variable.  */
+  if (iterator_level > 0)
     return false;
 
   op1 = e->value.op.op1;

@@ -1,3 +1,54 @@
+2016-08-06  Jonathan Wakely  <jwakely@redhat.com>
+
+	Backport from mainline
+	2016-08-05  Jonathan Wakely  <jwakely@redhat.com>
+
+	* include/std/functional (function::_Callable): Use lvalue in
+	result_of expression.
+	* testsuite/20_util/function/cons/refqual.cc: New test.
+
+	Backport from mainline
+	2016-07-22  Jonathan Wakely  <jwakely@redhat.com>
+
+	PR libstdc++/71964
+	* include/bits/stl_tree.h (_Rb_tree(_Rb_tree&&)): Move allocator.
+	* testsuite/23_containers/set/allocator/71964.cc: New test.
+
+	Backport from mainline
+	2016-08-02  Jonathan Wakely  <jwakely@redhat.com>
+
+	* testsuite/21_strings/basic_string/allocator/wchar_t/copy.cc:
+	Remove reundant check for _GLIBCXX_USE_WCHAR_T and fix char type.
+	* testsuite/21_strings/basic_string/allocator/wchar_t/copy_assign.cc:
+	Likewise.
+	* testsuite/21_strings/basic_string/allocator/wchar_t/minimal.cc:
+	Likewise.
+	* testsuite/21_strings/basic_string/allocator/wchar_t/move.cc:
+	Likewise.
+	* testsuite/21_strings/basic_string/allocator/wchar_t/move_assign.cc:
+	Likewise.
+	* testsuite/21_strings/basic_string/allocator/wchar_t/noexcept.cc:
+	Likewise.
+	* testsuite/21_strings/basic_string/allocator/wchar_t/swap.cc:
+	Likewise.
+
+	Backport from mainline
+	2016-01-18  Jonathan Wakely  <jwakely@redhat.com>
+
+	PR libstdc++/69243
+	* include/std/functional (_Function_base::_M_not_empty_function):
+	Change overloads for pointers to take arguments by value.
+	* testsuite/20_util/function/cons/57465.cc: Add tests for
+	pointer-to-member cases.
+
+	* doc/xml/manual/status_cxx2011.xml: Change "mainline GCC SVN" to
+	refer to the release series.
+	* doc/xml/manual/status_cxx2014.xml: Likewise.
+	* doc/html/manual/status.xml: Regenerate.
+
+	* testsuite/lib/libstdc++.exp (check_v3_target_filesystem_ts): Improve
+	comments.
+
 2016-08-02  Jonathan Wakely  <jwakely@redhat.com>
 
 	* testsuite/lib/libstdc++.exp (v3-build_support): Add
