@@ -1,3 +1,42 @@
+2016-08-18  Chung-Lin Tang  <cltang@codesourcery.com>
+
+	Backport from mainline
+	2016-08-18  Chung-Lin Tang  <cltang@codesourcery.com>
+
+	PR middle-end/70895
+	* gfortran.dg/goacc/loop-tree-1.f90: Add gimple scan-tree-dump test.
+	* c-c++-common/goacc/reduction-1.c: Likewise.
+	* c-c++-common/goacc/reduction-2.c: Likewise.
+	* c-c++-common/goacc/reduction-3.c: Likewise.
+	* c-c++-common/goacc/reduction-4.c: Likewise.
+
+2016-08-16  Jakub Jelinek  <jakub@redhat.com>
+
+	PR testsuite/77034
+	Backported from mainline
+	2016-07-25  Jason Merrill  <jason@redhat.com>
+
+	* g++.dg/init/elide5.C (operator new): Use decltype(sizeof(1)) instead
+	of unsigned long.
+
+2016-08-15  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/73434
+	* gcc.dg/torture/pr73434.c: New testcase.
+
+2016-08-15  Jakub Jelinek  <jakub@redhat.com>
+
+	PR tree-optimization/72824
+	* gcc.c-torture/execute/ieee/pr72824-2.c: New test.
+
+2016-08-14  Uros Bizjak  <ubizjak@gmail.com>
+
+	Backport from mainline
+	2016-08-14  Uros Bizjak  <ubizjak@gmail.com>
+
+	PR target/76342
+	* gcc.target/i386/pr76342.c: New test.
+
 2016-08-12  Jakub Jelinek  <jakub@redhat.com>
 
 	PR c/71512
