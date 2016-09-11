@@ -1,4 +1,4 @@
-# Copyright (C) 2008-2016 Free Software Foundation, Inc.
+# Copyright (C) 2016 Free Software Foundation, Inc.
 #
 # This file is part of GCC.
 #
@@ -16,18 +16,14 @@
 # along with GCC; see the file COPYING3.  If not see
 # <http://www.gnu.org/licenses/>.
 
-OPTIONS_H_EXTRA += $(srcdir)/config/i386/stringop.def
-TM_H += $(srcdir)/config/i386/x86-tune.def
+MULTILIB_OPTIONS     = marm/mthumb
+MULTILIB_DIRNAMES    = arm thumb
+MULTILIB_EXCEPTIONS  =
+MULTILIB_MATCHES     =
 
-i386-c.o: $(srcdir)/config/i386/i386-c.c
-	  $(COMPILE) $<
-	  $(POSTCOMPILE)
+MULTILIB_OPTIONS     += mfloat-abi=hard
+MULTILIB_DIRNAMES    += fpu
+MULTILIB_MATCHES     += mfloat-abi?hard=mhard-float
 
-i386.o: i386-builtin-types.inc
-
-i386-builtin-types.inc: s-i386-bt ; @true
-s-i386-bt: $(srcdir)/config/i386/i386-builtin-types.awk \
-  $(srcdir)/config/i386/i386-builtin-types.def
-	$(AWK) -f $^ > tmp-bt.inc
-	$(SHELL) $(srcdir)/../move-if-change tmp-bt.inc i386-builtin-types.inc
-	$(STAMP) $@
+MULTILIB_OPTIONS     += mno-thumb-interwork/mthumb-interwork
+MULTILIB_DIRNAMES    += normal interwork
