@@ -1,3 +1,78 @@
+2016-09-27  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/77478
+	* gcc.dg/torture/pr77478.c: New testcase.
+
+2016-09-27  Richard Biener  <rguenther@suse.de>
+
+	Backport from mainline
+	2016-09-01  Richard Biener  <rguenther@suse.de>
+
+	PR middle-end/77436
+	* gcc.dg/torture/pr77436.c: New testcase.
+
+	2016-09-06  Richard Biener  <rguenther@suse.de>
+
+	PR c/77450
+	* gcc.dg/pr77450.c: New testcase.
+
+	2016-09-15  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/77514
+	* gcc.dg/torture/pr77514.c: New testcase.
+
+	2016-09-15  Richard Biener  <rguenther@suse.de>
+
+	PR middle-end/77544
+	* c-c++-common/torture/pr77544.c: New testcase.
+
+	2016-09-19  Richard Biener  <rguenther@suse.de>
+
+	PR middle-end/77605
+	* gcc.dg/torture/pr77605.c: New testcase.
+
+2016-09-25  Uros Bizjak  <ubizjak@gmail.com>
+
+	Backport from mainline
+	2016-09-21  Richard Biener  <rguenther@suse.de>
+		    Jakub Jelinek  <jakub@redhat.com>
+
+	PR tree-optimization/77621
+	* gcc.dg/pr77621.c: New testcase.
+
+	Backport from mainline
+	2016-09-20  Uros Bizjak  <ubizjak@gmail.com>
+
+	PR target/77621
+	* gcc.target/i386/pr77621.c: New test.
+	* gcc.target/i386/vect-double-2.c: Update scan-tree-dump-times
+	pattern, loop should vectorize with -mtune=atom.
+
+2016-09-25  Bernd Edlinger  <bernd.edlinger@hotmail.de>
+
+	backport from mainline
+	2016-09-23  Bernd Edlinger  <bernd.edlinger@hotmail.de>
+		    Tom de Vries  <tom@codesourcery.com>
+
+	PR testsuite/77411
+	* c-c++-common/ubsan/object-size-9.c: Call __builtin_exit in C++.
+
+2016-09-22  Paolo Carlini  <paolo.carlini@oracle.com>
+
+	PR c++/71979
+	* g++.dg/cpp0x/pr71979.C: New.
+
+2016-09-21  Uros Bizjak  <ubizjak@gmail.com>
+
+	* gcc.c-torture/unsorted/dump-noaddr.x: Remove debug statements.
+
+2016-09-21  Georg-Johann Lay  <avr@gjlay.de>
+
+	Backport from 2016-09-21 trunk r240306.
+
+	PR target/77326
+	* gcc.target/avr/torture/pr77326.c: New test.
+
 2016-09-16  Jakub Jelinek  <jakub@redhat.com>
 	    Eric Botcazou  <ebotcazou@adacore.com>
 
