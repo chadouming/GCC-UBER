@@ -1,3 +1,46 @@
+2016-09-27  David Edelsohn  <dje.gcc@gmail.com>
+
+	Backport from mainline
+	2016-09-27  David Edelsohn  <dje.gcc@gmail.com>
+
+	* config/rs6000/rs6000.c (rs6000_output_symbol): Don't modify
+	VAR_DECL string.
+
+2016-09-27  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/77478
+	* tree-vect-loop-manip.c (vect_gen_niters_for_prolog_loop):
+	Fix alignment of SSA var used before the alignment prologue.
+
+2016-09-27  Senthil Kumar Selvaraj  <senthil_kumar.selvaraj@atmel.com>
+
+	Backport from trunk r227496
+
+	PR target/65210
+	* config/avr/avr.c (avr_eval_addr_attrib): Look for io_low
+	attribute as well.
+
+2016-09-22  Senthil Kumar Selvaraj  <senthil_kumar.selvaraj@atmel.com>
+
+	Backport from 2016-09-22 trunk r240388.
+
+	* config/avr/avr.c (avr_rtx_costs_1): Handle DImode MULT.
+	(avr_address_cost): Replace 61 with MAX_LD_OFFSET(mode).
+
+2016-09-21  Segher Boessenkool  <segher@kernel.crashing.org>
+
+	* doc/rtl.texi (JUMP_LABEL): Document RETURN and SIMPLE_RETURN values.
+
+2016-09-21  Georg-Johann Lay  <avr@gjlay.de>
+
+	Backport from 2016-09-21 trunk r240306.
+
+	PR target/77326
+	* config/avr/avr.c (hard-reg-set.h): Move #include up in front
+	of rtl.h to that HARD_CONST is defined in rtl.h.
+	(avr_notice_update_cc) [CC_NONE]: If insn touches some regs
+	mentioned in cc_status, do CC_STATUS_INIT.
+
 2016-09-16  Jonathan Wakely  <jwakely@redhat.com>
 
 	* doc/extend.texi (Integer Overflow Builtins): Fix type of out
