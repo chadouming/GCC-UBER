@@ -1,3 +1,168 @@
+2016-10-11  Steven G. Kargl  <kargl@gcc.gnu.org>
+
+	PR fortran/77942
+	* gfortran.dg/pr77942.f90
+
+2016-10-10  Eric Botcazou  <ebotcazou@adacore.com>
+
+	* gnat.dg/inline13.ad[sb]: New test.
+	* gnat.dg/inline13_pkg.ad[sb]: New helper.
+
+2016-10-10  Eric Botcazou  <ebotcazou@adacore.com>
+
+	* gnat.dg/biased_subtype.adb: New test.
+
+2016-10-07  Steven G. Kargl  <kargl@gcc.gnu.org>
+
+	PR fortran/77406
+	* gfortran.dg/pr77406.f90: New test.
+	* gfortran.dg/assumed_type_3.f90: Update error messages.
+	* gfortran.dg/defined_operators_1.f90: Ditto.
+	* gfortran.dg/generic_26.f90: Ditto.
+	* gfortran.dg/generic_7.f90: Ditto.
+	* gfortran.dg/gomp/udr5.f90: Ditto.
+	* gfortran.dg/gomp/udr7.f90: Ditto.
+	* gfortran.dg/interface_1.f90: Ditto.
+	* gfortran.dg/interface_37.f90: Ditto.
+	* gfortran.dg/interface_5.f90: Ditto.
+	* gfortran.dg/interface_6.f90: Ditto.
+	* gfortran.dg/interface_7.f90
+	* gfortran.dg/no_arg_check_3.f90
+	* gfortran.dg/operator_5.f90
+	* gfortran.dg/proc_ptr_comp_20.f90: Ditto.
+
+2016-10-06  James Clarke  <jrtc27@jrtc27.com>
+            Eric Botcazou  <ebotcazou@adacore.com>
+
+	* g++.dg/other/pr77759.C: New test.
+
+2016-10-05  Steven G. Kargl  <kargls@gcc.gnu.org>
+
+	PR fortran/58991
+	PR fortran/58992
+	* gfortran.dg/associate_22.f90: New test.
+
+2016-10-04  Martin Sebor  <msebor@redhat.com>
+
+	* g++.dg/warn/Wplacement-new-size-4.C: Use relative line number
+	references.
+
+2016-10-04  Martin Sebor  <msebor@redhat.com>
+
+	Backport from trunk.
+	* lib/gcc-dg.exp (process-message): Support relative line number
+	notation - .+4 or .-1 etc.
+	* gcc.dg/dg-test-1.c: New test.
+
+2016-10-04  Uros Bizjak  <ubizjak@gmail.com>
+
+	Backport from mainline
+	2016-09-29  Uros Bizjak  <ubizjak@gmail.com>
+
+	PR target/77756
+	* gcc.target/i386/pr77756.c: New test.
+
+2016-09-29  Jerry DeLisle  <jvdelisle@gcc.gnu.org>
+
+	Backport from trunk
+	PR libgfortran/77707
+	* gfortran.dg/inquire_17.f90: New test.
+
+2016-09-28  Steven G. Kargl  <kargl@gcc.gnu.org>
+
+	Backport from trunk
+	PR fortran/41922
+	* gfortran.dg/equiv_constraint_5.f90: Adjust the error message.
+	* gfortran.dg/equiv_constraint_7.f90: Ditto.
+	* gfortran.dg/pr41922.f90: New test.
+
+	PR fortran/60774
+	* gfortran.dg/empty_label.f: Adjust test for new error message.
+	* gfortran.dg/empty_label.f90: Ditto.
+	* gfortran.dg/empty_label_typedecl.f90: Ditto.
+	* gfortran.dg/label_3.f90: Deleted (redundant with empty_label.f90).
+	* gfortran.dg/warnings_are_errors_1.f90: Remove invalid statement label.
+
+	PR fortran/61318
+	* gfortran.dg/pr61318.f90: New test.
+
+	PR fortran/68566
+	* gfortran.dg/pr68566.f90: new test.
+
+	PR fortran/69514
+	* gfortran.dg/pr69514_1.f90: New test.
+	* gfortran.dg/pr69514_2.f90: New test.
+
+	PR fortran/69867
+	* gfortran.dg/pr69867.f90: New test.
+
+	PR fortran/69962
+	* gfortran.dg/pr69962.f90: New test.
+
+	PR fortran/70006
+	* gfortran.dg/pr70006.f90: New test.
+
+	PR fortran/71067
+	* gfortran.dg/pr71067_1.f90: New test.
+	* gfortran.dg/pr71067_2.f90: Ditto.
+
+	PR fortran/71730
+	* gfortran.dg/pr71730.f90: New test.
+	* gfortran.dg/bounds_check_strlen_2.f90: Fix invalid code.
+	* gfortran.dg/array_constructor_27.f03: Update dg-error message.
+	* gfortran.dg/array_constructor_26.f03: Ditto.
+
+	PR fortran/71799
+	* gfortran.dg/pr71799.f90: New test.
+
+	PR fortran/71859
+	* gfortran.dg/pr71859.f90: New test.
+	* gfortran.dg/intrinsic_numeric_arg.f: Update error message.
+	* gfortran.dg/coarray_collectives_1.f90: Ditto.
+
+	PR fortran/71862
+	* gfortran.dg/pr71862.f90: New test.
+
+	PR fortran/77260
+	* gfortran.dg/pr77260_1.f90: New test.
+	* gfortran.dg/pr77260_2.f90: Ditto.
+
+	PR fortran/77351
+	* gfortran.dg/pr77351.f90: New test.
+
+	PR fortran/77372
+	gfortran.dg/pr77372.f90: New test.
+
+	PR fortran/77380
+	* gfortran.dg/pr77380.f90: New test.
+
+	PR fortran/77391
+	* gfortran.dg/pr77391.f90: New test.
+
+	PR fortran/77420
+	* gfortran.dg/pr77420_1.f90: New test.
+	* gfortran.dg/pr77420_2.f90: Ditto.
+	* gfortran.dg/pr77420_3.f90: New test. Requires ...
+	* gfortran.dg/pr77420_4.f90: this file.
+
+	PR fortran/77429
+	* gfortran.dg/pr77429.f90: New test.
+
+	PR fortran/77460
+	* gfortran.dg/pr77460.f90: New test.
+
+	PR fortran/77506
+	* gfortran.dg/pr77506.f90: New test.
+
+	PR fortran/77507
+	* gfortran.dg/ieee/pr77507.f90: New test.
+
+	PR fortran/77612
+	* gfortran.dg/pr77612.f90: New test.
+
+	PR fortran/77694
+	* gfortran.dg/pr77694.f90: New test.
+
 2016-09-27  Richard Biener  <rguenther@suse.de>
 
 	PR tree-optimization/77478
