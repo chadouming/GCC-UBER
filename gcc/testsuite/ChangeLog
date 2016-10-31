@@ -1,3 +1,77 @@
+2016-10-24  Thomas Koenig  <tkoenig@gcc.gnu.org>
+
+	Backport from trunk
+	PR fortran/78021
+	* gfortran.dg/string_length_3.f90:  New test.
+
+2016-10-24  Steven G. Kargl  <kargl@gcc.gnu.org>
+
+	PR fortran/71895
+	* gfortran.dg/pr71895.f90: New test.
+
+2016-10-24  Paul Thomas  <pault@gcc.gnu.org>
+
+	Backport from trunk
+	PR fortran/61420
+	PR fortran/78013
+	* gfortran.dg/proc_ptr_49.f90: New test.
+
+2016-10-23  Bill Schmidt  <wschmidt@linux.vnet.ibm.com>
+
+	Backport from mainline
+	2016-10-17  Bill Schmidt  <wschmidt@linux.vnet.ibm.com>
+
+	PR tree-optimization/77916
+	* gcc.dg/torture/pr77916.c: New.
+
+2016-10-19  Uros Bizjak  <ubizjak@gmail.com>
+
+	PR target/77991
+	* gcc.target/i386/pr77991.c: New test.
+
+2016-10-17  Steven G. Kargl  <kargl@gcc.gnu.org>
+
+	Backport from trunk
+	PR fortran/77978
+	* gfortran.dg/pr77978_1.f90: New test.
+	* gfortran.dg/pr77978_2.f90: Ditto.
+	* gfortran.dg/pr77978_3.f90: Ditto.
+
+2016-10-17  Bill Schmidt  <wschmidt@linux.vnet.ibm.com>
+
+	Backport from mainline
+	2016-10-13  Bill Schmidt  <wschmidt@linux.vnet.ibm.com>
+
+	PR tree-optimization/77937
+	* gcc.dg/torture/pr77937-1.c: New.
+	* gcc.dg/torture/pr77937-2.c: New.
+
+2016-10-17  Martin Liska  <mliska@suse.cz>
+
+	Backported from mainline
+	2016-10-13  Martin Liska  <mliska@suse.cz>
+
+	PR tree-optimization/77943
+	* g++.dg/tree-ssa/pr77943.C: New test.
+
+2016-10-15  Eric Botcazou  <ebotcazou@adacore.com>
+
+	* gcc.target/sparc/bmaskbshuf.c: Rename to...
+	* gcc.target/sparc/bmaskbshuf-1.c: ...this.
+	* gcc.target/sparc/bmaskbshuf-2.c: New test.
+
+2016-10-13  Andrew Senkevich  <andrew.senkevich@intel.com>
+
+	Backport from trunk
+	* testsuite/gcc.target/i386/pcommit-1.c: Deleted test.
+	* testsuite/gcc.target/i386/sse-12.c: Deleted -pcommit option.
+	* testsuite/gcc.target/i386/sse-13.c: Ditto.
+	* testsuite/gcc.target/i386/sse-14.c: Ditto.
+	* testsuite/gcc.target/i386/sse-22.c: Ditto.
+	* testsuite/gcc.target/i386/sse-23.c: Ditto.
+	* testsuite/g++.dg/other/i386-2.C: Ditto.
+	* testsuite/g++.dg/other/i386-3.C: Ditto.
+
 2016-10-10  Eric Botcazou  <ebotcazou@adacore.com>
 
 	* gnat.dg/biased_subtype.adb: New test.
@@ -38,7 +112,7 @@
 	subroutine as an actual argument when numeric argument is expected.
 
 2016-09-30  Steven G. Kargl  <kargl@gcc.gnu.org>
- 
+
 	Backport from trunk
 
 	PR fortran/69867
@@ -64,14 +138,14 @@
 2016-09-30  Steven G. Kargl  <kargl@gcc.gnu.org>
 
 	Backport from trunk
- 
+
 	PR fortran/71799
 	* gfortran.dg/pr71799.f90: New test.
 
 2016-09-30  Steven G. Kargl  <kargl@gcc.gnu.org>
 
 	Backport from trunk
- 
+
 	PR fortran/70006
 	* gfortran.dg/pr70006.f90: New test.
 
