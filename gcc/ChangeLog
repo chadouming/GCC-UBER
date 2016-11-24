@@ -1,3 +1,168 @@
+2016-11-18  Walter Lee  <walt@tilera.com>
+
+	Backport from mainline
+	2016-11-18  Walter Lee  <walt@tilera.com>
+
+	* config/tilegx/tilegx.c (tilegx_gen_bundles): Preserve
+	  end-of-bundle marker for consecutive barriers.
+
+2016-11-18  Walter Lee  <walt@tilera.com>
+
+	Backport from mainline
+	2016-11-18  Walter Lee  <walt@tilera.com>
+
+	* config/tilegx/tilegx.md (clzsi2): Fix for big-endian.
+
+2016-11-15  Matthias Klose  <doko@ubuntu.com>
+
+	* doc/install.texi: Move the 'Overriding configure test results'
+	subsub section to the 'Cross-Compiler-Specific Options' sub section.
+
+2016-11-13  Eric Botcazou  <ebotcazou@adacore.com>
+
+	* ipa-icf.c (sem_function::merge): Do not create a wrapper also if the
+	original function needs a static chain.
+
+2016-11-11  Uros Bizjak  <ubizjak@gmail.com>
+
+	PR target/78310
+	* config/i386/i386.md (rotate to rotatex splitter): Avoid overflow
+	when calculating operand 2.
+	(rotate to rotatex zext splitter): Ditto.
+
+2016-11-11  Dominik Vogt  <vogt@linux.vnet.ibm.com>
+
+	PR target/77822
+	* config/s390/s390.md ("extzv", "*extzv<mode>_zEC12")
+	("*extzv<mode>_z10"): Check validity of zero_extend arguments.
+
+2016-11-09  Uros Bizjak  <ubizjak@gmail.com>
+
+	PR target/78262
+	* config/i386/i386.md (*<shift_insn><mode>3_doubleword): Mark
+	operand 0 as earlyclobber.
+	(*ashl<mode>3_doubleword): Ditto for all operand 0 alternatives.
+
+2016-11-07  Peter Bergner  <bergner@vnet.ibm.com>
+
+	Backport from trunk
+	2016-11-07  Peter Bergner  <bergner@vnet.ibm.com>
+
+	* config.gcc (powerpc*-*-*, rs6000*-*-*): Remove setting of
+	INCLUDE_EXTRA_SPEC for Advance Toolchain builds.
+
+2016-11-06  Jack Howarth  <howarth.at.gcc@gmail.com>
+
+	PR driver/78206
+	* incpath.c: (remove_dup(): Also silently ignore EPERM.
+
+2016-11-07  Richard Biener  <rguenther@suse.de>
+
+	PR target/78229
+	* config/i386/i386.c (ix86_gimple_fold_builtin): Do not adjust
+	EH info.
+
+2016-11-03  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2016-08-12  Martin Liska  <mliska@suse.cz>
+	Adam Fineman  <afineman@afineman.com>
+
+	* gcov.c (process_file): Create .gcov file when .gcda
+	file is missing.
+
+2016-11-03  Richard Biener  <rguenther@suse.de>
+
+	Backport from mainline
+	2016-09-29  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/77768
+	* tree-ssa-sccvn.c (visit_reference_op_store): Properly deal
+	with stores to a place we know has a constant value.
+	* tree-vrp.c (set_defs_to_varying): New helper avoiding
+	writing to vr_const_varying.
+	(vrp_initialize): Call it.
+	(vrp_visit_stmt): Likewise.
+	(evrp_dom_walker::before_dom_children): Likewise.
+	* tree-ssa-pre.c (eliminate_dom_walker::before_dom_children):
+	Handle stores to readonly memory when removing redundant stores.
+
+2016-11-03  Eric Botcazou  <ebotcazou@adacore.com>
+
+	Backport from mainline
+	2016-10-17  Eric Botcazou  <ebotcazou@adacore.com>
+
+	* explow.c (validize_mem): Do not modify the argument in-place.
+
+2016-11-02  Will Schmidt  <will_schmidt@vnet.ibm.com>
+
+	Backport from trunk
+	2016-10-26  Will Schmidt <will_schmidt@vnet.ibm.com>
+
+	PR middle-end/72747
+	* gimplify.c (gimplify_init_constructor): Move emit of constructor
+	assignment to earlier in the if/else logic.
+
+2016-11-02  Richard Biener  <rguenther@suse.de>
+
+	Backport from mainline
+	2016-11-02  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/78047
+	* tree-ssa-structalias.c (push_fields_onto_fieldstack): Initialize
+	fake field at offset zero conservatively regarding to may_have_pointers.
+
+	2016-10-07  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/77879
+	* tree-ssa-structalias.c (handle_const_call): Properly handle
+	NRV return slots.
+	(handle_pure_call): Likewise.
+
+	2016-10-06  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/77839
+	* tree-ssa-sccvn.c (set_ssa_val_to): Forbid value -> constant value
+	lattice transition.
+
+	2016-09-27  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/77745
+	* tree-ssa-pre.c (eliminate_dom_walker::before_dom_children):
+	When removing redundant stores make sure to check compatibility
+	of the TBAA state for downstream accesses.
+	* tree-ssa-sccvn.c (visit_reference_op_store): Likewise for when
+	value-numbering virtual operands for store matches.
+
+	2016-09-21  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/77648
+	* tree-ssa-structalias.c (process_constraint): Handle all DEREF
+	with complex RHS.
+	(make_transitive_closure_constraints): Adjust comment.
+	(make_any_offset_constraints): New function.
+	(handle_rhs_call): Make sure to first expand a pointer to all
+	subfields before transitively closing it.
+	(handle_const_call): Likewise.  Properly expand returned
+	pointers as well.
+	(handle_pure_call): Likewise.
+
+2016-11-01  John David Anglin  <danglin@gcc.gnu.org>
+
+	PR target/78166
+	* config/pa/pa.md: Add new shift/add patterns to handle
+	(plus (mult (reg) (mem_shadd_operand)) (reg)) source operand.
+
+2016-11-01  Kyrylo Tkachov  <kyrylo.tkachov@arm.com>
+
+	Backport from mainline
+	2016-10-21  Kyrylo Tkachov  <kyrylo.tkachov@arm.com>
+
+	PR rtl-optimization/78038
+	* ree.c (get_defs): Return NULL if a defining insn for REG cannot
+	be deduced to set REG through the RTL structure.
+	(make_defs_and_copies_lists): Return false on a failing get_defs call.
+
 2016-10-29  John David Anglin  <danglin@gcc.gnu.org>
 
 	* config/pa/pa.h (BIGGEST_ALIGNMENT): Adjust comment.
@@ -224,7 +389,7 @@
 	Use <round_constraint> as operand 1 constraint.
 
 2016-10-06  James Clarke  <jrtc27@jrtc27.com>
-            Eric Botcazou  <ebotcazou@adacore.com>
+	    Eric Botcazou  <ebotcazou@adacore.com>
 
 	PR target/77759
 	* config/sparc/sparc.c (classify_data_t): Remove int_regs field.
