@@ -1152,6 +1152,7 @@ ARM_FUNC_ALIAS ledf2 ltdf2
 	b	1f
 #endif
 ARM_FUNC_START cmpdf2
+	CFI_START_FUNCTION
 #if 0
 ARM_FUNC_ALIAS nedf2 cmpdf2
 ARM_FUNC_ALIAS eqdf2 cmpdf2
