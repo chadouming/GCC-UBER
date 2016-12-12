@@ -1,3 +1,269 @@
+2016-12-09  Jonathan Wakely  <jwakely@redhat.com>
+
+	Backport from mainline
+	2016-12-08  David Edelsohn  <dje.gcc@gmail.com>
+
+	* testsuite/25_algorithms/headers/algorithm/
+	parallel_algorithm_assert2.cc: Move dg-do run first.
+
+2016-12-08  Jonathan Wakely  <jwakely@redhat.com>
+
+	PR libstdc++/71856
+	* doc/xml/manual/using.xml: Document macro.
+	* include/bits/c++config [_GLIBCXX_DEBUG || _GLIBCXX_PARALLEL]
+	(__glibcxx_assert): Rename to __glibcxx_assert_impl.
+	[_GLIBCXX_DEBUG] (__glibcxx_assert): Expand to __glibcxx_assert_impl.
+	* include/parallel/base.h [_GLIBCXX_PARALLEL_ASSERTIONS]
+	(_GLIBCXX_PARALLEL_ASSERT): Expand to __glibcxx_assert_impl.
+	[!_GLIBCXX_PARALLEL_ASSERTIONS] (_GLIBCXX_PARALLEL_ASSERT): Define as
+	empty.
+	* testsuite/25_algorithms/headers/algorithm/
+	parallel_algorithm_assert2.cc: New test.
+
+2016-12-08  Jonathan Wakely  <jwakely@redhat.com>
+
+	Backport from mainline
+	2016-11-10  François Dumont  <fdumont@gcc.gnu.org>
+
+	PR libstdc++/77459
+	* src/c++11/debug.cc (format_word): Delete.
+	(print_literal): New. Replace call to print_word for literals.
+
+2016-12-07  Jonathan Wakely  <jwakely@redhat.com>
+
+	Backport from mainline
+	2016-11-13  Jonathan Wakely  <jwakely@redhat.com>
+
+	PR libstdc++/78326
+	* include/experimental/memory_resource (memory_resource::_S_max_align):
+	Change access to protected.
+
+	Backport from mainline
+	2016-10-19  Jonathan Wakely  <jwakely@redhat.com>
+
+	* testsuite/experimental/memory/shared_ptr/cons/unique_ptr_ctor.cc:
+	Add tests for valid and invalid conversions.
+	* testsuite/experimental/memory/shared_ptr/cons/weak_ptr_ctor.cc:
+	Likewise.
+
+	Backport from mainline
+	2016-10-19  Jonathan Wakely  <jwakely@redhat.com>
+
+	* include/experimental/bits/shared_ptr.h
+	(__shared_ptr<__libfund_v1<_Tp, false>, _Lp>::_Compatible): Just use
+	is_convertible for non-array specialization.
+	(__shared_ptr<__libfund_v1<_Tp, false>, _Lp>::_UniqCompatible): New
+	constraint for conversions from unique_ptr.
+	(__shared_ptr<__libfund_v1<_Tp, false>, _Lp>::__shared_ptr): Constrain.
+	(__shared_ptr<__libfund_v1<_Tp, false>, _Lp>::reset): Likewise.
+	(__sp_compatible_v): New variable template for trait.
+	(__sp_is_constructible): New trait to check shared_ptr constraints.
+	(__sp_is_constructible_v): New variable template for trait.
+	(__shared_ptr<__libfund_v1<_Tp, true>, _Lp>::_SafeConv): New
+	constraint for construction/reset, using __sp_is_constructible_v.
+	(__shared_ptr<__libfund_v1<_Tp, true>, _Lp>::_UniqCompatible): New
+	constraint for conversions from unique_ptr.
+	(__shared_ptr<__libfund_v1<_Tp, true>, _Lp>::__shared_ptr): Constrain.
+	(__shared_ptr<__libfund_v1<_Tp, true>, _Lp>::reset): Likewise.
+	(shared_ptr::_SafeConv): Constraint for checking constructors.
+	(shared_ptr(Tp1*), shared_ptr(_Tp1, _Deleter))
+	(shared_ptr(_Tp1, _Deleter, _Alloc)): Constrain with _SafeConv.
+	(shared_ptr(const weak_ptr<_Tp1>&)): Constrain with _Compatible.
+	(shared_ptr(auto_ptr<_Tp1>&&)): Fix, remove TODO.
+	* testsuite/experimental/memory/shared_ptr/cons/pointer_ctor.cc:
+	Remove tests using invalid conversions.
+	* testsuite/experimental/memory/shared_ptr/cons/pointer_ctor_neg.cc:
+	New test.
+	* testsuite/experimental/memory/shared_ptr/cons/torture.cc: New test.
+	* testsuite/experimental/memory/shared_ptr/modifiers/reset.cc: Remove
+	tests using invalid conversions.
+	* testsuite/experimental/memory/shared_ptr/modifiers/reset_neg.cc: New
+	test.
+	* testsuite/experimental/memory/shared_ptr/observers/use_count.cc:
+	Remove tests using invalid conversions.
+
+	Backport from mainline
+	2016-10-18  Jonathan Wakely  <jwakely@redhat.com>
+
+	* include/experimental/bits/shared_ptr.h: Fix indentation.
+
+	Backport from mainline
+	2016-10-18  Jonathan Wakely  <jwakely@redhat.com>
+
+	* include/experimental/bits/shared_ptr.h (shared_ptr(shared_ptr&&)):
+	Remove const from parameter.
+	(operator<(const shared_ptr<T>&, nullptr_t)): Use correct
+	specialization of std::less.
+	* testsuite/experimental/memory/shared_ptr/comparison/comparison.cc:
+	Test comparison with nullptr and actually call test functions.
+
+	Backport from mainline
+	2016-10-11  Jonathan Wakely  <jwakely@redhat.com>
+
+	* doc/xml/manual/intro.xml: Document LWG 2484 status.
+	* libsupc++/nested_exception.h (_Throw_with_nested_impl)
+	(_Throw_with_nested_helper): Remove.
+	(__throw_with_nested_impl): New overloaded functions to implement
+	throw_with_nested logic.
+	(throw_with_nested): Call __throw_with_nested_impl.
+	(_Rethrow_if_nested_impl): Remove
+	(__rethrow_if_nested_impl): New overloaded functions to implement
+	rethrow_if_nested logic.
+	(rethrow_if_nested): Call __rethrow_if_nested_impl.
+	* testsuite/18_support/nested_exception/rethrow_if_nested.cc: Test
+	problem cases from LWG 2484.
+
+	Backport from mainline
+	2016-10-11  Jonathan Wakely  <jwakely@redhat.com>
+
+	* python/libstdcxx/v6/printers.py (build_libstdcxx_dictionary):
+	Register printer for std::__cxx11::list.
+	* python/libstdcxx/v6/xmethods.py (ListMethodsMatcher.match): Match
+	std::__cxx11::list as well as std::list.
+
+	Backport from mainline
+	2016-10-12  Jonathan Wakely  <jwakely@redhat.com>
+
+	* doc/xml/manual/intro.xml: Document LWG 2442 status.
+	* include/std/mutex [_GLIBCXX_HAVE_TLS] (__once_call_impl): Remove.
+	(call_once): Use lambda expression and std::__invoke instead of
+	__bind_simple and __once_call_impl.
+	* testsuite/30_threads/call_once/dr2442.cc: New test.
+
+	Backport from mainline
+	2016-10-10  Jonathan Wakely  <jwakely@redhat.com>
+
+	* include/bits/allocator.h (allocator<T>::is_always_equal): Define.
+	* testsuite/20_util/allocator/requirements/typedefs.cc: Test for
+	is_always_equal.
+	* testsuite/util/testsuite_allocator.h
+	(uneq_allocator::is_always_equal): Define as false_type.
+
+	Backport from mainline
+	2016-10-06  Jonathan Wakely  <jwakely@redhat.com>
+
+	* doc/xml/manual/status_cxx2011.xml: Update status.
+	* include/std/scoped_allocator (__outer_allocator_t, __outermost_type):
+	New helpers for recursive OUTERMOST.
+	(__outermost): Use __outermost_type::_S_outermost.
+	(__do_outermost, scoped_allocator_adaptor::__outermost_type): Remove.
+	(scoped_allocator_adaptor::__outermost_alloc_traits): Use new
+	__outermost_type helper.
+	(scoped_allocator_adaptor::_Constructible): New alias template.
+	(scoped_allocator_adaptor::scoped_allocator_adaptor<_Outer2>):
+	Constrain template constructors.
+	* testsuite/20_util/scoped_allocator/3.cc: New test.
+	* testsuite/20_util/scoped_allocator/outermost.cc: New test.
+
+	Backport from mainline
+	2016-08-26  Jonathan Wakely  <jwakely@redhat.com>
+
+	PR libstdc++/51960
+	* doc/xml/manual/intro.xml: Document DR 2127 change.
+	* doc/html/*: Regenerate.
+	* include/bits/stl_raw_storage_iter.h (operator=(_Tp&&)): Add.
+	(operator++(), operator++(int)): Use injected class name.
+	* testsuite/20_util/raw_storage_iterator/dr2127.cc: New test.
+
+	Backport from mainline
+	2016-08-04  Jonathan Wakely  <jwakely@redhat.com>
+
+	* include/std/functional (_Unwrap): Rename to __inv_unwrap.
+	(__invfwd): Adjust.
+	(__invoke_impl): Remove unused template parameters.
+	* testsuite/20_util/function_objects/invoke/59768.cc: Remove unused
+	parameter.
+	* testsuite/20_util/function_objects/invoke/ref_ext.cc: Copy 59768.cc
+	and test __invoke extension for C++11.
+
+2016-12-07  Ville Voutilainen  <ville.voutilainen@gmail.com>
+
+	Backport from mainline
+	2016-12-06  Ville Voutilainen  <ville.voutilainen@gmail.com>
+
+	Constrain optional's __constexpr_addressof in its return type
+	and use a constexpr addressof for optional, if available.
+	* include/experimental/optional (__constexpr_addressof):
+	Constrain in the return type instead of in a template parameter.
+	(_Has_addressof_mem)
+	(_Has_addressof_free, _Has_addressof, __constexpr_addressof):
+	Guard with #ifndef __cpp_lib_addressof_constexpr.
+	(operator->()): Use std::__addressof if it's constexpr.
+
+2016-12-06  Aditya Kumar  <hiraditya@msn.com>
+
+	* src/c++11/shared_ptr.cc (_Sp_locker::_Sp_locker(const void* p)): Add
+	noexcept on constructor.
+	(_Sp_locker::_Sp_locker(const void* p1, const void* p2)): Same.
+
+2016-12-01  Rainer Orth  <ro@CeBiTec.Uni-Bielefeld.DE>
+
+	Backport from mainline
+	2016-11-21  Rainer Orth  <ro@CeBiTec.Uni-Bielefeld.DE>
+
+	* acinclude.m4 (GLIBCXX_CHECK_MATH11_PROTO): Update comments.
+	(__CORRECT_ISO_CPP11_MATH_H_PROTO): Rename to ...
+	(__CORRECT_ISO_CPP11_MATH_H_PROTO_FP): ... this.
+	Add test for C++11 <math.h> integral overloads.
+	* configure: Regenerate.
+	* config.h.in: Regenerate.
+
+	* include/c_global/cmath [__cplusplus >= 201103L]: Reflect
+	__CORRECT_ISO_CPP11_MATH_H_PROTO to
+	__CORRECT_ISO_CPP11_MATH_H_PROTO_FP rename.
+	* include/c_global/cmath [_GLIBCXX_USE_C99_MATH &&
+	!_GLIBCXX_USE_C99_FP_MACROS_DYNAMIC && __cplusplus >= 201103L]
+	(std::fpclassify): Wrap in !__CORRECT_ISO_CPP11_MATH_H_PROTO_INT.
+	(std::isfinite): Likewise.
+	(std::isinf): Likewise.
+	(std::isnan): Likewise.
+	(std::isnormal): Likewise.
+	(std::signbit): Likewise.
+	(std::isgreater): Likewise.
+	(std::isgreaterequal): Likewise.
+	(std::isless): Likewise.
+	(std::islessequal): Likewise.
+	(std::islessgreater): Likewise.
+	(std::isunordered): Likewise.
+	[__cplusplus >= 201103L && _GLIBCXX_USE_C99_MATH_TR1]
+	(std::acosh): Likewise.
+	(std::asinh): Likewise.
+	(std::atanh): Likewise.
+	(std::cbrt): Likewise.
+	(std::copysign): Likewise.
+	(std::erf): Likewise.
+	(std::erfc): Likewise.
+	(std::exp2): Likewise.
+	(std::expm1): Likewise.
+	(std::fdim): Likewise.
+	(std::fma): Likewise.
+	(std::fmax): Likewise.
+	(std::fmin): Likewise.
+	(std::hypot): Likewise.
+	(std::ilogb): Likewise.
+	(std::lgamma): Likewise.
+	(std::llrint): Likewise.
+	(std::llround): Likewise.
+	(std::log1p): Likewise.
+	(std::log2): Likewise.
+	(std::logb): Likewise.
+	(std::lrint): Likewise.
+	(std::lround): Likewise.
+	(std::nearbyint): Likewise.
+	(std::nextafter): Likewise.
+	(std::nexttoward): Likewise.
+	(std::remainder): Likewise.
+	(std::remquo): Likewise.
+	(std::rint): Likewise.
+	(std::round): Likewise.
+	(std::scalbln): Likewise.
+	(std::scalbn): Likewise.
+	(std::tgamma): Likewise.
+	(std::trunc): Likewise.
+	* include/tr1/cmath [_GLIBCXX_USE_C99_MATH_TR1 && __cplusplus >=
+	201103L]: Reflect __CORRECT_ISO_CPP11_MATH_H_PROTO to
+	__CORRECT_ISO_CPP11_MATH_H_PROTO_FP rename.
+
 2016-11-23  Jonathan Wakely  <jwakely@redhat.com>
 
 	* testsuite/24_iterators/reverse_iterator/71771.cc: Replace calls to
