@@ -6667,25 +6667,43 @@ rs6000_expand_vector_init (rtx target, rtx vals)
   /* Double word values on VSX can use xxpermdi or lxvdsx.  */
   if (VECTOR_MEM_VSX_P (mode) && (mode == V2DFmode || mode == V2DImode))
     {
-      rtx op0 = XVECEXP (vals, 0, 0);
-      rtx op1 = XVECEXP (vals, 0, 1);
+      rtx op[2];
+      size_t i;
+      size_t num_elements = (all_same) ? 1 : 2;
+      for (i = 0; i < num_elements; i++)
+	{
+	  op[i] = XVECEXP (vals, 0, i);
+	  /* Just in case there is a SUBREG with a smaller mode, do a
+	     conversion.  */
+	  if (GET_MODE (op[i]) != inner_mode)
+	    {
+	      rtx tmp = gen_reg_rtx (inner_mode);
+	      convert_move (tmp, op[i], 0);
+	      op[i] = tmp;
+	    }
+	  /* Allow load with splat double word.  */
+	  else if (MEM_P (op[i]))
+	    {
+	      if (!all_same)
+		op[i] = force_reg (inner_mode, op[i]);
+	    }
+	  else if (!REG_P (op[i]))
+	    op[i] = force_reg (inner_mode, op[i]);
+	}
+
       if (all_same)
 	{
-	  if (!MEM_P (op0) && !REG_P (op0))
-	    op0 = force_reg (inner_mode, op0);
 	  if (mode == V2DFmode)
-	    emit_insn (gen_vsx_splat_v2df (target, op0));
+	    emit_insn (gen_vsx_splat_v2df (target, op[0]));
 	  else
-	    emit_insn (gen_vsx_splat_v2di (target, op0));
+	    emit_insn (gen_vsx_splat_v2di (target, op[0]));
 	}
       else
 	{
-	  op0 = force_reg (inner_mode, op0);
-	  op1 = force_reg (inner_mode, op1);
 	  if (mode == V2DFmode)
-	    emit_insn (gen_vsx_concat_v2df (target, op0, op1));
+	    emit_insn (gen_vsx_concat_v2df (target, op[0], op[1]));
 	  else
-	    emit_insn (gen_vsx_concat_v2di (target, op0, op1));
+	    emit_insn (gen_vsx_concat_v2di (target, op[0], op[1]));
 	}
       return;
     }
@@ -28446,11 +28464,15 @@ rs6000_output_function_epilogue (FILE *file,
 {
 #if TARGET_MACHO
   macho_branch_islands ();
-  /* Mach-O doesn't support labels at the end of objects, so if
-     it looks like we might want one, insert a NOP.  */
+
   {
     rtx_insn *insn = get_last_insn ();
     rtx_insn *deleted_debug_label = NULL;
+
+    /* Mach-O doesn't support labels at the end of objects, so if
+       it looks like we might want one, take special action.
+
+       First, collect any sequence of deleted debug labels.  */
     while (insn
 	   && NOTE_P (insn)
 	   && NOTE_KIND (insn) != NOTE_INSN_DELETED_LABEL)
@@ -28463,11 +28485,40 @@ rs6000_output_function_epilogue (FILE *file,
 	  deleted_debug_label = insn;
 	insn = PREV_INSN (insn);
       }
-    if (insn
-	&& (LABEL_P (insn)
+
+    /* Second, if we have:
+       label:
+	 barrier
+       then this needs to be detected, so skip past the barrier.  */
+
+    if (insn && BARRIER_P (insn))
+      insn = PREV_INSN (insn);
+
+    /* Up to now we've only seen notes or barriers.  */
+    if (insn)
+      {
+	if (LABEL_P (insn)
 	    || (NOTE_P (insn)
-		&& NOTE_KIND (insn) == NOTE_INSN_DELETED_LABEL)))
-      fputs ("\tnop\n", file);
+		&& NOTE_KIND (insn) == NOTE_INSN_DELETED_LABEL))
+	  /* Trailing label: <barrier>.  */
+	  fputs ("\tnop\n", file);
+	else
+	  {
+	    /* Lastly, see if we have a completely empty function body.  */
+	    while (insn && ! INSN_P (insn))
+	      insn = PREV_INSN (insn);
+	    /* If we don't find any insns, we've got an empty function body;
+	       I.e. completely empty - without a return or branch.  This is
+	       taken as the case where a function body has been removed
+	       because it contains an inline __builtin_unreachable().  GCC
+	       states that reaching __builtin_unreachable() means UB so we're
+	       not obliged to do anything special; however, we want
+	       non-zero-sized function bodies.  To meet this, and help the
+	       user out, let's trap the case.  */
+	    if (insn == NULL)
+	      fputs ("\ttrap\n", file);
+	  }
+      }
     else if (deleted_debug_label)
       for (insn = deleted_debug_label; insn; insn = NEXT_INSN (insn))
 	if (NOTE_KIND (insn) == NOTE_INSN_DELETED_DEBUG_LABEL)

@@ -1,3 +1,165 @@
+2016-12-14  Uros Bizjak  <ubizjak@gmail.com>
+
+	PR target/59874
+	* config/i386/i386.c (enum ix86_builtins): Add IX86_BUILTIN_CLZS
+	and IX86_BUILTIN_CTZS.
+	(bdesc_args): Add __builtin_clzs and __builtin_ctzs.
+	(ix86_fold_builtin): Handle IX86_BUILTIN_CTZS and IX86_BUILTIN_CLZS.
+
+2016-12-14  Wilco Dijkstra  <wdijkstr@arm.com>
+	    Jakub Jelinek  <jakub@redhat.com>
+
+	PR target/78796
+	* config/aarch64/aarch64.c (aarch64_classify_symbol): Merge large
+	model checks into switch.
+
+2016-12-14  Thomas Preud'homme  <thomas.preudhomme@arm.com>
+
+	Backport from mainline
+	2016-11-25  Thomas Preud'homme  <thomas.preudhomme@arm.com>
+
+	* tree-ssa-math-opts.c (struct symbolic_number): Improve comment.
+
+2016-12-14  Thomas Preud'homme  <thomas.preudhomme@arm.com>
+
+	Backport from mainline
+	2016-11-25  Thomas Preud'homme  <thomas.preudhomme@arm.com>
+
+	PR tree-optimization/77673
+	* tree-ssa-math-opts.c (struct symbolic_number): Add new src field.
+	(init_symbolic_number): Initialize src field from src parameter.
+	(perform_symbolic_merge): Select most dominated statement as the
+	source statement.  Set src field of resulting n structure from the
+	input src with the lowest address.
+	(find_bswap_or_nop): Rename source_stmt into ins_stmt.
+	(bswap_replace): Rename src_stmt into ins_stmt.  Initially get source
+	of load from src field rather than insertion statement.  Cancel
+	optimization if statement analyzed is not dominated by the insertion
+	statement.
+	(pass_optimize_bswap::execute): Rename src_stmt to ins_stmt.  Compute
+	dominance information.
+
+2016-12-13  Michael Meissner  <meissner@linux.vnet.ibm.com>
+
+	Backport from mainline
+	2016-12-07  Michael Meissner  <meissner@linux.vnet.ibm.com>
+
+	PR target/72717
+	* config/rs6000/rs6000.c (rs6000_expand_vector_init): If the
+	V2DImode elements are SUBREG's convert the result into DImode
+	rather than failing in emit_move_insn.
+
+2016-12-13  Iain Sandoe  <iain@codesourcery.com>
+
+	Backport from mainline
+	2016-12-11  Iain Sandoe  <iain@codesourcery.com>
+
+	PR rtl-optimization/71496
+	* config/rs6000/darwin.md (load_macho_picbase_si): Mark as non-
+	copyable.  (load_macho_picbase_di, reload_macho_picbase_si,
+	reload_macho_picbase_di): Likewise.
+
+2016-12-12  Bernd Schmidt  <bschmidt@redhat.com>
+
+	Backport from mainline
+	2016-11-07  Bernd Schmidt  <bschmidt@redhat.com>
+
+        PR rtl-optimization/77309
+        * combine.c (make_compound_operation): Allow EQ for IN_CODE, and
+        don't assume an equality comparison for plain COMPARE.
+        (simplify_comparison): Pass a more accurate code to
+        make_compound_operation.
+
+2016-12-12 Thomas Preud'homme <thomas.preudhomme@arm.com>
+
+	Backport from mainline
+	2016-11-22  Thomas Preud'homme  <thomas.preudhomme@arm.com>
+
+	PR target/77904
+	* config/arm/arm.c (thumb1_compute_save_reg_mask): Mark frame pointer
+	in save register mask if it is needed.
+
+2016-12-11  Iain Sandoe  <iain@codesourcery.com>
+
+	Backport from mainline
+	2016-11-27  Iain Sandoe  <iain@codesourcery.com>
+		    Rainer Orth  <ro@CeBiTec.Uni-Bielefeld.DE>
+
+	PR target/67710
+	* config.in: Regenerate
+	* config/darwin-driver.c (darwin_driver_init): Emit a version string
+	for the assembler.
+	* config/darwin.h(ASM_MMACOSX_VERSION_MIN_SPEC): New, new tests.
+	* config/darwin.opt(asm_macosx_version_min): New.
+	* config/i386/darwin.h: Handle ASM_MMACOSX_VERSION_MIN_SPEC.
+	* configure: Regenerate
+	* configure.ac: Check for mmacosx-version-min handling.
+
+2016-12-11  Iain Sandoe  <iain@codesourcery.com>
+
+	Backport from mainline
+	2016-11-27  Iain Sandoe  <iain@codesourcery.com>
+
+	PR target/57438
+	* config/i386/i386.c (ix86_code_end): Note that we emitted code
+	where the function might otherwise appear empty for picbase thunks.
+	(ix86_output_function_epilogue): If we find a zero-sized function
+	assume that reaching it is UB and trap.  If we find a trailing label
+	append a nop.
+	* config/rs6000/rs6000.c (rs6000_output_function_epilogue): If we
+	find a zero-sized function assume that reaching it is UB and trap.
+	If we find a trailing label, append a nop.
+
+2016-12-11 Iain Sandoe  <iain@codesourcery.com>
+
+	Backport from mainline
+	2016-11-27  Iain Sandoe  <iain@codesourcery.com>
+
+	PR target/71767
+	* config/darwin-sections.def (picbase_thunk_section): New.
+	* config/darwin.c (darwin_init_sections): Set up picbase thunk
+	section. (darwin_rodata_section, darwin_objc2_section,
+	machopic_select_section, darwin_asm_declare_constant_name,
+	darwin_emit_weak_or_comdat, darwin_function_section): Don’t use
+	coalesced with newer linkers.
+	(darwin_override_options): Decide on usage of coalesed sections
+	on the basis of the target linker version.
+	* config/darwin.h (MIN_LD64_NO_COAL_SECTS): New.
+	* config/darwin.opt  (mtarget-linker): New.
+	* config/i386/i386.c (ix86_code_end): Do not force the thunks into
+	a coalesced section, instead use a thunks section.
+
+	Backport from mainline
+	2016-11-28  Iain Sandoe  <iain@codesourcery.com>
+
+	PR target/71767
+	* configure.ac (with_ld64): Use portable method to extract the
+	major part of the version number.
+	* configure: Regenerated.
+
+	Backport from mainline
+	2016-11-27  Iain Sandoe  <iain@codesourcery.com>
+
+	PR target/71767
+	* configure.ac (with-ld64): New var, set for Darwin, set on
+	detection of ld64, gcc_cv_ld64_export_dynamic: New, New test.
+	* config/darwin.h: Use LD64_HAS_DYNAMIC export. DEF_LD64: New,
+	define.
+	* config/darwin10.h(DEF_LD64): Update for this target version.
+	* config/darwin12.h(LINK_GCC_C_SEQUENCE_SPEC): Remove rdynamic
+	test.  (DEF_LD64): Update for this target version.
+	* configure: Regenerated.
+	* config.in: Regenerated.
+
+	Backport from mainline
+	2016-11-27  Iain Sandoe  <iain@codesourcery.com>
+
+	PR target/71767
+	* config/darwin.c (imachopic_indirection_name): Make data
+	section indirections linker-visible.
+	* config/darwin.h (ASM_GENERATE_INTERNAL_LABEL): Make local
+	constant labels linker-visible.
+
 2016-12-09  Thomas Preud'homme  <thomas.preudhomme@arm.com>
 
 	Backport from mainline
